@@ -1,5 +1,9 @@
 # 💻 Duban Zuluaga | Portfolio
 A personal portfolio designed and built to function as a system terminal. Beyond showcasing projects, this space serves as an experiment in strictly modular component architecture and a retro CRT monitor aesthetic.
+
+- https://www.soydz.com/
+- https://www.duban-zuluaga-portafolio.vercel.app/
+
 ## 🚀 The Purpose
 The goal was to create an interface that mimics a real operating system, where navigation feels like moving through directories and project details are presented as system logs. 
 Technically, this project is an exercise in implementing **Atomic Design**, ensuring the UI remains scalable, maintainable, and consistent across the entire application.
