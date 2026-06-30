@@ -3,7 +3,7 @@ FROM node:24-slim AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml* ./
 RUN corepack enable && corepack prepare pnpm@latest --activate
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Etapa 2: Compilar la aplicación
 FROM node:24-slim AS builder
