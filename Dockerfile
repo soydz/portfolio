@@ -31,7 +31,7 @@ USER nextjs
 
 EXPOSE 3100
 
-ENV NODE_ENV="production"
+ENV NODE_ENV=production
 ENV PORT="3100"
 ENV HOSTNAME="0.0.0.0"
 
