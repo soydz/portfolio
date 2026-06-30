@@ -46,7 +46,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col lg:flex-row">
         <SidebarLeft
           personalInfo={{
-            avatarUrl: "/images/avatar-soydz.jpg",
             fullName: "Duban Zuluaga",
             jobTitle: "Full-Stack Developer",
           }}
