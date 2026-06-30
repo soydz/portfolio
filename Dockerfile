@@ -2,15 +2,16 @@
 FROM node:24-slim AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml* ./
-RUN corepack enable && corepack prepare pnpm@latest --activate
-RUN pnpm install
+RUN corepack enable && corepack prepare pnpm@9 --activate
+ENV PNPM_ENABLE_PRE_POST_INSTALL_SCRIPTS=true
+RUN pnpm install --frozen-lockfile
 
 # Etapa 2: Compilar la aplicación
 FROM node:24-slim AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9 --activate
 RUN pnpm build
 
 # Etapa 3: Servir con Node.js (producción)
