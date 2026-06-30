@@ -36,10 +36,9 @@ export function SidebarLeft({
   extraSkill,
 }: Readonly<SidebarLeftProps>) {
   return (
-    <aside className="w-full mb-20 h-full lg:w-[300] lg:sticky lg:top-0 lg:mb-0 lg:h-screen overflow-y-auto bg-neutral py-16 px-8 flex flex-col gap-6">
+    <aside className="w-full mb-20 h-full lg:w-[300] lg:sticky lg:top-0 lg:mb-0 lg:h-screen overflow-y-auto bg-neutral pt-10 pb-16 px-8 flex flex-col gap-6">
       <div className="grid grid-col-1 md:grid-cols-2 md:items-center lg:flex lg:flex-col lg:gap-4">
         <PersonalInformation
-          avatarUrl={personalInfo.avatarUrl}
           fullName={personalInfo.fullName}
           jobTitle={personalInfo.jobTitle}
         />
