@@ -60,6 +60,8 @@ export function Profile({
               alt={fullName}
               width={320}
               height={320}
+              priority
+              sizes="(max-width: 639px) 160px, (max-width: 767px) 256px, (max-width: 1023px) 288px, 320px"
               className="w-40 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 sm:w-64 md:w-72 lg:w-80 lg:grayscale lg:group-hover:grayscale-0 xl:object-cover"
             />
           </div>
