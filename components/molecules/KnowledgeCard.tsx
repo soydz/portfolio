@@ -18,7 +18,6 @@ export interface KnowledgeCardProps {
   title: string;
   cardRows: KnowledgeCardRowProps[];
   footer: {
-    title: string;
     proyects: KnowledgeCardProject[];
   };
 }
@@ -35,7 +34,9 @@ function KnowledgeCardRow({
         <Icon className="text-primary/85 size-4" />
         <span className="text-txt-title font-mono text-sm">{title}</span>
       </div>
-      <p className="text-txt-main/70 text-sm pl-6 font-mono leading-relaxed">{description}</p>
+      <p className="text-txt-main/70 text-sm pl-6 font-mono leading-relaxed">
+        {description}
+      </p>
     </div>
   );
 }
@@ -60,7 +61,9 @@ export function KnowledgeCard({
           <div className="text-primary">
             <Icon />
           </div>
-          <h3 className="font-mono font-bold uppercase text-txt-title tracking-tighter">{title}</h3>
+          <h3 className="font-mono font-bold uppercase text-txt-title tracking-tighter">
+            {title}
+          </h3>
         </div>
 
         <div className="flex flex-col gap-4 py-2">
@@ -78,10 +81,14 @@ export function KnowledgeCard({
         <Separator />
       </div>
       <div className="flex flex-col gap-3 mt-4">
-        <h6 className="text-txt-main font-mono uppercase text-sm">{footer.title}</h6>
         <div className="flex flex-col gap-2 text-sm ">
           {footer.proyects.map((item, index) => (
-            <TerminalLink key={item.label} label={item.label} url={item.url} numeration={`[${index + 1}]`} />
+            <TerminalLink
+              key={item.label}
+              label={item.label}
+              url={item.url}
+              numeration={`[${index + 1}]`}
+            />
           ))}
         </div>
       </div>

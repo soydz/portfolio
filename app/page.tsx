@@ -18,7 +18,7 @@ export default function Home() {
             fullName: "Duban Zuluaga",
             jobTitle: "Fullstack Developer",
             avatarUrl: "/images/header-soydz.png",
-            description: "Software Engineer specializing in backend and fullstack development with Java, Spring Boot, TypeScript, and React. Expert in building high-performance, resilient systems with automated CI/CD pipelines. Delivers fluid, user-centric interfaces that drive measurable product outcomes.",
+            description: "Backend developer working mainly with Java, Spring Boot, and GraphQL. I also build frontends with React and TypeScript. My projects include a microservices fleet monitoring system with real-time WebSocket alerts, a financial tracking platform with Next.js, and a Kubernetes-deployed sales API. Everything containerized, everything with CI/CD.",
             labelBtn: "More",
             modalData: {
               human: {
@@ -66,19 +66,15 @@ export default function Home() {
                 },
               ],
               footer: {
-                title: "Deployed_deliverables",
                 proyects: [
                   {
                     label: "pt_supermercado",
                     url: "https://github.com/soydz/pt-supermercado",
                   },
+
                   {
-                    label: "MOVIE_TRACKER_BACKEND",
-                    url: "https://github.com/soydz/movieTrackerWeb/tree/main/Backend",
-                  },
-                  {
-                    label: "fg_360",
-                    url: "https://github.com/soydz/fg360"
+                    label: "fleet_guard_360",
+                    url: "https://github.com/soydz/fleet-guard-360"
                   }
                 ],
               },
@@ -105,16 +101,12 @@ export default function Home() {
                 },
               ],
               footer: {
-                title: "Deployed_deliverables",
                 proyects: [
                   {
                     label: "RENEWABLE_ENERGIES_FRONTEND",
                     url: "https://github.com/soydz/renewableEnergiesFrontend",
                   },
-                  {
-                    label: "MOVIE_TRACKER_FRONTEND",
-                    url: "https://github.com/soydz/movieTrackerWeb/tree/main/Frontend",
-                  },
+
                 ],
               },
             },
@@ -139,15 +131,14 @@ export default function Home() {
                 },
               ],
               footer: {
-                title: "Deployed_deliverables",
                 proyects: [
                   {
                     label: "pt_supermercado",
                     url: "https://github.com/soydz/pt-supermercado",
                   },
                   {
-                    label: "fg_360",
-                    url: "https://github.com/soydz/fg360",
+                    label: "fleet_guard_360",
+                    url: "https://github.com/soydz/fleet-guard-360"
                   },
                 ],
               },
@@ -173,7 +164,6 @@ export default function Home() {
                 },
               ],
               footer: {
-                title: "Deployed_deliverables",
                 proyects: [
                   {
                     label: "unix_shell",
@@ -199,7 +189,7 @@ export default function Home() {
               dates: "2023 - Present",
               degree: "Ingeniero de Sistemas",
               description:
-                "Systems Engineering curriculum grounded in science, technology, and investigative research. Prepared to tackle the challenges of the 4th Industrial Revolution (AI/ML, IoT, Blockchain) through a software engineering approach. Expertly trained in modern development methodologies, DevOps culture, and the implementation of robust, scalable enterprise applications.",
+                "Systems Engineering at Universidad de Antioquia. Coursework covers software engineering, DevOps, and distributed systems.",
             },
             {
               degree: "Red Hat System Administration I (RH124)",
@@ -233,9 +223,46 @@ export default function Home() {
                   "RESTful API for multi-branch sales tracking",
                   "Containerized database management using stateful sets"
                 ],
-                challenge: "The primary challenge was orchestrating the deployment on Kubernetes and ensuring data persistence across pod restarts using a robust volume management strategy.",
+                challenge: "Data persistence across pod restarts using Kubernetes StatefulSets and persistent volumes.",
                 links: [
                   { label: "Github_Repository", url: "https://github.com/soydz/pt-supermercado" }
+                ]
+              }
+            },
+            {
+              title: "Fleet Guard 360",
+              description: "Real-time fleet monitoring system with satellite tracking, built on a microservices architecture.",
+              imageUrl: "/images/fleet-guard-360.png",
+              textBtn: "Learn_More",
+              details: {
+                stack: ["Java 21", "Spring Boot", "GraphQL", "React", "Docker", "RabbitMQ"],
+                features: [
+                  "Microservices architecture with API Gateway and JWT auth",
+                  "Real-time push notifications via WebSocket (STOMP/SockJS)",
+                  "Nginx reverse proxy with isolated Docker networks"
+                ],
+                challenge: "Two isolated Docker networks, JWT auth across 5 microservices, and real-time alerts via WebSocket/RabbitMQ.",
+                links: [
+                  { label: "Github_Repository", url: "https://github.com/soydz/fleet-guard-360" }
+                ]
+              }
+            },
+            {
+              title: "Tracely",
+              description: "High-precision wealth tracking platform with budget management, analytics, and type-safe financial data.",
+              imageUrl: "/images/tracely.png",
+              textBtn: "Learn_More",
+              details: {
+                stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "TanStack Query", "Zod"],
+                features: [
+                  "Dynamic balance overview with real-time surplus/deficit indicators",
+                  "Category-based budget management with visual progress bars",
+                  "Interactive donut charts for income and expense analytics"
+                ],
+                challenge: "Implementing a feature-based architecture with high cohesion per domain module while ensuring type safety across the entire transaction lifecycle using Zod schemas and TanStack Query for server state management.",
+                links: [
+                  { label: "Github_Repository", url: "https://github.com/soydz/tracely" },
+                  { label: "Live_Demo", url: "https://tracely.soydz.com/" }
                 ]
               }
             },
@@ -259,24 +286,6 @@ export default function Home() {
               }
             },
             {
-              title: "Personal Movie Tracker",
-              description: "Application to track and manage movie viewing history with secure user authentication.",
-              imageUrl: "/images/movie-tracker.png",
-              textBtn: "Learn_More",
-              details: {
-                stack: ["Java", "Spring Boot", "React", "JWT", "MySQL"],
-                features: [
-                  "Secure user authentication using JWT",
-                  "Personalized movie watch-list and rating system",
-                  "Reactive interface for real-time tracking"
-                ],
-                challenge: "Implementing a stateless authentication flow with JWT that ensured security across different sessions while maintaining a seamless user experience.",
-                links: [
-                  { label: "Github_Repository", url: "https://github.com/soydz/movieTrackerWeb" }
-                ]
-              }
-            },
-            {
               title: "Unix Command Interpreter",
               description: "A from-scratch Unix shell implementation capable of executing both internal and external commands.",
               imageUrl: "/images/terminal-unix.png",
@@ -292,24 +301,6 @@ export default function Home() {
                 links: [
                   { label: "Shell_Repo", url: "https://github.com/soydz/so-lab2-unix-shell" },
                   { label: "Utilities_Unix_Repo", url: "https://github.com/soydz/so-lab1-unix-utilities" }
-                ]
-              }
-            },
-            {
-              title: "Latin America Sanitation Analysis",
-              description: "Data processing tool designed to analyze sanitation and water access statistics across Latin American countries.",
-              imageUrl: "/images/sanitation-latam.png",
-              textBtn: "Learn_More",
-              details: {
-                stack: ["Java", "File I/O", "Data Processing"],
-                features: [
-                  "Automated parsing of large-scale statistical files",
-                  "Comparative analysis across multiple countries",
-                  "Report generation with processed metrics"
-                ],
-                challenge: "Normalizing inconsistent data formats from various sources into a unified model to allow for accurate cross-country statistical comparisons.",
-                links: [
-                  { label: "Github_Repository", url: "https://github.com/soydz/sanitation-in-Latin-America" }
                 ]
               }
             }
@@ -341,7 +332,6 @@ export default function Home() {
           label="SYSTEM_STATUS:"
           status="STABLE"
           separator="//"
-          date="2026"
           owner="SOY_DZ"
         />
       </footer>

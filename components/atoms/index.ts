@@ -1,5 +1,4 @@
 export * from "./Button";
-export * from "./Avatar";
 export * from "./ProgressBar";
 export * from "./SocialIcons";
 export * from "./Separator";

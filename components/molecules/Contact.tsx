@@ -4,6 +4,7 @@ import { Button, Input, TextArea, TextAreaProps, Toast } from "../atoms";
 import { useState } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
 import { ChevronRight, Mail } from "lucide-react";
+import { FormEvent } from "react";
 
 interface InputProps {
     type: string;
@@ -23,7 +24,7 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
     // estado del formulario
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-    async function handleSubmit(event: any) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setStatus('sending');
 

@@ -37,7 +37,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html
       lang="en"
@@ -46,7 +45,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col lg:flex-row">
         <SidebarLeft
           personalInfo={{
-            fullName: "Duban Zuluaga",
             jobTitle: "Full-Stack Developer",
           }}
           contactInfo={[
@@ -79,14 +77,6 @@ export default function RootLayout({
                 label: "TypeScript",
                 percentage: 50,
               },
-              {
-                label: "Bash",
-                percentage: 35,
-              },
-              {
-                label: "C",
-                percentage: 25,
-              },
             ],
           }}
           extraSkill={{
@@ -107,9 +97,7 @@ export default function RootLayout({
           }}
         />
 
-        <main className="flex-1 min-w-0 overflow-x-hidden">
-          {children}
-        </main>
+        <main className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
 
         <SidebarRight
           socialMenu={{
@@ -125,7 +113,6 @@ export default function RootLayout({
             { icon: Rocket, label: "Deployments", href: "#portfolio_log" },
           ]}
         />
-
       </body>
     </html>
   );
