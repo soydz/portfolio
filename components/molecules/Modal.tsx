@@ -52,8 +52,15 @@ export function Modal({ title, isOpen, onClose, children }: Readonly<ModalProps>
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-            <div ref={modalRef} data-modal className="w-full max-w-11/12 bg-neutral border-2 border-tertiary font-mono shadow-[0_0_20px_rgba(255,92,79,0.3)] lg:max-w-5xl">
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-[fadeIn_0.3s_ease-out]"
+            onClick={(e) => e.target === e.currentTarget && onClose()}
+        >
+            <div
+                ref={modalRef}
+                data-modal
+                className="w-full max-w-11/12 bg-neutral border-2 border-tertiary font-mono shadow-[0_0_20px_rgba(255,92,79,0.3)] lg:max-w-5xl animate-[scaleIn_0.3s_ease-out]"
+            >
                 <div className="flex justify-between items-center p-3 border-b-2 border-tertiary bg-tertiary/10">
                     <span className="text-primary text-xs tracking-widest uppercase">
                         {`[ System_info : ${title} ]`}
