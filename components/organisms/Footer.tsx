@@ -4,7 +4,6 @@ interface FooterProps {
   label: string;
   status: string;
   separator: string;
-  date: string;
   owner: string;
 }
 
@@ -12,7 +11,6 @@ export function Footer({
   label,
   status,
   separator,
-  date,
   owner,
 }: Readonly<FooterProps>) {
   return (
