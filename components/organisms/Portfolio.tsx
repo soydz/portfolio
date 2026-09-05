@@ -1,6 +1,6 @@
 'use client'
 
-import { FolderOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight, FolderOpen } from "lucide-react";
 import { Modal, PortfolioCard, PortfolioCardProps, ProjectDetails } from "../molecules";
 import { useState, useEffect, useRef } from "react";
 
@@ -10,56 +10,89 @@ interface PortfolioProps {
 }
 
 export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
-  // guarda la card seleccionada
   const [selectCard, setSelectCard] = useState<PortfolioCardProps | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // se usa Refs en lugar de States porque no queremos que el carrusel se vuelva a renderizar cada vez que se pausa/inicia
-  // se usa para controlar si el modal de detalles de cada card esta abierto
   const isModalOpenRef = useRef(false);
-  // se usa para controlar la pausa del carrusel
   const isPausedRef = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(null);
+  const activeIndexRef = useRef(0);
+  const totalCards = cards.length;
+
+  function scrollToCard(index: number) {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const slide = container.querySelectorAll('[data-slide]')[index] as HTMLElement;
+    if (!slide) return;
+
+    container.scrollTo({
+      left: slide.offsetLeft,
+      behavior: "smooth",
+    });
+
+    activeIndexRef.current = index;
+    setActiveIndex(index);
+  }
+
+  function scrollNext() {
+    const nextIndex = activeIndexRef.current >= totalCards - 1 ? 0 : activeIndexRef.current + 1;
+    scrollToCard(nextIndex);
+  }
+
+  function scrollPrev() {
+    const prevIndex = activeIndexRef.current <= 0 ? totalCards - 1 : activeIndexRef.current - 1;
+    scrollToCard(prevIndex);
+  }
+
+  function startAutoScroll() {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      if (isPausedRef.current || isModalOpenRef.current) return;
+      scrollNext();
+    }, 4000);
+  }
+
+  function handleManualNav(action: () => void) {
+    action();
+    startAutoScroll();
+  }
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [totalCards]);
 
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
 
-    // función de desplazamiento automatico
-    const autoScroll = () => {
-      // se detiene si esta pausado o el modal esta abierto
-      if (isPausedRef.current || isModalOpenRef.current) return;
+    function handleScroll() {
+      if (!container) return;
+      const containerCenter = container.scrollLeft + container.clientWidth / 2;
+      let closest = 0;
+      let minDistance = Infinity;
 
-      const { scrollLeft, scrollWidth, clientWidth } = container;
+      container.querySelectorAll('[data-slide]').forEach((el, index) => {
+        const slideEl = el as HTMLElement;
+        const slideCenter = slideEl.offsetLeft + slideEl.offsetWidth / 2;
+        const distance = Math.abs(containerCenter - slideCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closest = index;
+        }
+      });
 
-      // calcula limite maximo del scroll (ancho total - ancho visible)
-      const maxScroll = scrollWidth - clientWidth;
-      // obtiene el ancho de la tarjeta y le suma el espaciado entre tarjetas (gap-6)
-      const card = container.querySelector('.snap-center') as HTMLElement;
-      const cardWidth = card ? card.offsetWidth + 24 : clientWidth;
+      activeIndexRef.current = closest;
+      setActiveIndex(closest);
+    }
 
-      // ciclo infinito que hace que de la ultima tarjeta salte a la primera
-      // si llega al limite, o el siguiente salto lo deja mas alla del limite. con un margen de error de 5px
-      if (scrollLeft >= maxScroll - 5 || scrollLeft + cardWidth >= maxScroll - 5) {
-        container.scrollTo({
-          left: 0,
-          behavior: "smooth",
-        });
-
-      } else {
-        // desplaza la posición actual mas el ancho de una card
-        container.scrollTo({
-          left: scrollLeft + cardWidth,
-          behavior: "smooth",
-        });
-      }
-    };
-
-    // cada 4 segundos se cambia de card
-    const interval = setInterval(autoScroll, 4000);
-
-    // al desmostar el componente se limpia el intervalo, para evitar fugas de memoria
-    return () => clearInterval(interval);
-  }, [])
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section>
@@ -67,33 +100,65 @@ export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
         <FolderOpen className="text-primary" />
         <h2 className="text-txt-title font-mono font-semibold py-4">{title}</h2>
       </div>
-      {/* se pausa si el usuario interactua con el mouse o el modal esta abierto */}
-      <div
-        ref={scrollRef}
-        onMouseEnter={() => { isPausedRef.current = true }}
-        onMouseLeave={() => {
-          if (!isModalOpenRef.current) {
-            isPausedRef.current = false
-          }
-        }}
-        className="flex gap-6 overflow-x-auto snap-x scrollbar-hide"
-      >
-        {/* para el centrado correcto de la card inicial */}
-        <div className="xl:min-w-[40%] xl:h-px" />
-        {cards?.map((card) => (
-          <div key={card.title} className="snap-center">
-            <PortfolioCard
-              {...card}
-              onBtnClick={() => {
-                setSelectCard(card)
-                isPausedRef.current = true;     // detiene el carrusel
-                isModalOpenRef.current = true;  // marca el modal como abierto
-              }}
+
+      <div className="relative group/carousel">
+        <button
+          onClick={() => handleManualNav(scrollPrev)}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-neutral/80 border border-tertiary p-2 text-primary opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-tertiary hover:text-white cursor-pointer"
+          aria-label="Previous project"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={() => handleManualNav(scrollNext)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-neutral/80 border border-tertiary p-2 text-primary opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-tertiary hover:text-white cursor-pointer"
+          aria-label="Next project"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        <div
+          ref={scrollRef}
+          onMouseEnter={() => { isPausedRef.current = true }}
+          onMouseLeave={() => {
+            if (!isModalOpenRef.current) {
+              isPausedRef.current = false
+            }
+          }}
+          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        >
+          {cards?.map((card) => (
+            <div
+              key={card.title}
+              data-slide
+              className="min-w-full snap-center flex justify-center px-4 py-5"
+            >
+              <PortfolioCard
+                {...card}
+                onBtnClick={() => {
+                  setSelectCard(card)
+                  isPausedRef.current = true;
+                  isModalOpenRef.current = true;
+                }}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex justify-center gap-2 mt-4">
+          {cards.map((card, index) => (
+            <button
+              key={card.title}
+              onClick={() => handleManualNav(() => scrollToCard(index))}
+              className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
+                activeIndex === index
+                  ? "bg-primary w-6"
+                  : "bg-tertiary hover:bg-primary/50"
+              }`}
+              aria-label={`Go to ${card.title}`}
             />
-          </div>
-        ))}
-        {/* para el centrado correcto de la card final */}
-        <div className="xl:min-w-[40%] xl:h-px" />
+          ))}
+        </div>
       </div>
 
       <Modal title={selectCard?.title || "Portfolio"} isOpen={!!selectCard}
@@ -102,8 +167,7 @@ export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
           isPausedRef.current = false;
           isModalOpenRef.current = false;
         }} >
-        {selectCard && <ProjectDetails {...selectCard.details}
-        />}
+        {selectCard && <ProjectDetails {...selectCard.details} />}
       </Modal>
 
     </section>
