@@ -47,7 +47,7 @@ export function ProjectDetails({ stack, features, challenge, links }: Readonly<P
             <section className="flex flex-col gap-3">
                 <span className="text-primary/75 text-xs uppercase tracking-widest">{`// Access_logs`}</span>
                 <div className="flex flex-col gap-2">
-                    {links?.map((link, index) => (
+                    {links?.map((link) => (
                         <TerminalLink key={link.label} label={link.label.toLocaleLowerCase()} url={link.url} prefix="cat /dev/logs/" />
                     ))}
                 </div>

@@ -1,5 +1,6 @@
 import { Button } from "../atoms";
 import { ProjectDetailsProps } from "./ProjectDetails";
+import Image from "next/image";
 
 export interface PortfolioCardProps {
   title: string;
@@ -22,7 +23,7 @@ export function PortfolioCard({
       <div className="flex flex-col h-full justify-between">
         <div className="flex flex-col gap-6">
           <div className="relative w-full aspect-video overflow-hidden">
-            <img src={imageUrl} alt={title} className="w-full h-full object-cover object-left" />
+            <Image src={imageUrl} alt={title} width={640} height={360} className="w-full h-full object-cover object-left" />
           </div>
           <div className="flex flex-col gap-3">
             <h6 className="font-bold font-mono uppercase tracking-tighter text-gradient transition-colors">{title}</h6>

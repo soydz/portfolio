@@ -1,5 +1,6 @@
 import { Button } from "../atoms";
 import { HumanDataProps, StrengthProps } from "./ProfileDetails";
+import Image from "next/image";
 
 export interface ModalData {
   human: HumanDataProps;
@@ -35,7 +36,7 @@ export function Profile({
         <p className="text-primary opacity-80 text-sm tracking-widest font-mono">{`/// INIT_SEQUENCE: PROFILE`}</p>
         <div className="flex flex-col gap-4 h-full justify-between py-6">
           <div className="flex flex-col gap-3">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">I'm {fullName}</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">I&apos;m {fullName}</h2>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black uppercase tracking-tighter text-gradient">{jobTitle}</h2>
           </div>
           <div>
@@ -54,9 +55,11 @@ export function Profile({
           <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse group-hover:bg-primary/40 transition-all duration-500" />
 
           <div className="relative z-10 overflow-hidden">
-            <img
+            <Image
               src={avatarUrl}
               alt={fullName}
+              width={320}
+              height={320}
               className="w-40 transition-all duration-700 ease-in-out scale-100 group-hover:scale-105 sm:w-64 md:w-72 lg:w-80 lg:grayscale lg:group-hover:grayscale-0 xl:object-cover"
             />
           </div>
