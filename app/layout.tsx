@@ -45,12 +45,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col lg:flex-row">
         <SidebarLeft
           personalInfo={{
-            jobTitle: "FullStack Developer",
+            title: "USER_PROFILE",
           }}
           contactInfo={[
-            { label: "Location", value: "Colombia" },
-            { label: "WorkMode", value: "Remote / Hybrid" },
-            { label: "TimeZone", value: "GMT-5" },
+            { label: "Region", value: "GMT-5 (Colombia)" },
+            { label: "Mode", value: "Remote / Hybrid" },
           ]}
 
           languages={{

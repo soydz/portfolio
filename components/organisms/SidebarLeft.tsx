@@ -17,7 +17,7 @@ interface DownloadCVProps {
 }
 
 interface SidebarLeftProps {
-  personalInfo: PersonalInformationProps;
+  personalInfo: { title: string };
   contactInfo: InfoRowProps[];
   languages: SkillMetricProps;
   techStack: SkillMetricProps;
@@ -37,9 +37,9 @@ export function SidebarLeft({
   return (
     <aside className="w-full mb-20 h-full lg:w-[300] lg:sticky lg:top-0 lg:mb-0 lg:h-screen bg-neutral flex flex-col">
       {/* Header fijo: info personal + CV */}
-      <div className="flex-shrink-0 px-8 pt-8 pb-6 flex flex-col gap-4">
+      <div className="flex-shrink-0 px-8 py-6 mb-4 flex flex-col gap-4">
         <div className="flex flex-col lg:gap-4">
-          <PersonalInformation jobTitle={personalInfo.jobTitle} />
+          <PersonalInformation title={personalInfo.title} />
           <div className="lg:w-full">
             {contactInfo.map((info) => (
               <InfoRow key={info.label} label={info.label} value={info.value} />
