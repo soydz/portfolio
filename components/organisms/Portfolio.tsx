@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight, FolderOpen } from "lucide-react";
 import { Modal, PortfolioCard, PortfolioCardProps, ProjectDetails } from "../molecules";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface PortfolioProps {
   title: string;
@@ -20,7 +20,7 @@ export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
   const activeIndexRef = useRef(0);
   const totalCards = cards.length;
 
-  function scrollToCard(index: number) {
+const scrollToCard = useCallback((index: number) => {
     const container = scrollRef.current;
     if (!container) return;
 
@@ -34,37 +34,37 @@ export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
 
     activeIndexRef.current = index;
     setActiveIndex(index);
-  }
+  }, []);
 
-  function scrollNext() {
+  const scrollNext = useCallback(() => {
     const nextIndex = activeIndexRef.current >= totalCards - 1 ? 0 : activeIndexRef.current + 1;
     scrollToCard(nextIndex);
-  }
+  }, [totalCards, scrollToCard]);
 
-  function scrollPrev() {
+  const scrollPrev = useCallback(() => {
     const prevIndex = activeIndexRef.current <= 0 ? totalCards - 1 : activeIndexRef.current - 1;
     scrollToCard(prevIndex);
-  }
+  }, [totalCards, scrollToCard]);
 
-  function startAutoScroll() {
+  const startAutoScroll = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       if (isPausedRef.current || isModalOpenRef.current) return;
       scrollNext();
     }, 4000);
-  }
+  }, [scrollNext]);
 
-  function handleManualNav(action: () => void) {
+  const handleManualNav = useCallback((action: () => void) => {
     action();
     startAutoScroll();
-  }
+  }, [startAutoScroll]);
 
   useEffect(() => {
     startAutoScroll();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [totalCards]);
+  }, [startAutoScroll]);
 
   useEffect(() => {
     const container = scrollRef.current;
