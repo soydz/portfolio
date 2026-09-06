@@ -45,7 +45,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col lg:flex-row">
         <SidebarLeft
           personalInfo={{
-            jobTitle: "Full-Stack Developer",
+            jobTitle: "FullStack Developer",
           }}
           contactInfo={[
             { label: "Location", value: "Colombia" },
@@ -71,11 +71,11 @@ export default function RootLayout({
             skills: [
               {
                 label: "Java",
-                percentage: 60,
+                percentage: 75,
               },
               {
                 label: "TypeScript",
-                percentage: 50,
+                percentage: 45,
               },
             ],
           }}
