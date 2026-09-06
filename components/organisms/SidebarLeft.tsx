@@ -35,41 +35,38 @@ export function SidebarLeft({
   extraSkill,
 }: Readonly<SidebarLeftProps>) {
   return (
-    <aside className="w-full mb-20 h-full lg:w-[300] lg:sticky lg:top-0 lg:mb-0 lg:h-screen overflow-y-auto bg-neutral  pb-16 px-8 flex flex-col gap-6">
-      <div className="grid grid-col-1 md:grid-cols-2 md:items-center lg:flex lg:flex-col lg:gap-4">
-        <PersonalInformation jobTitle={personalInfo.jobTitle} />
-        <div className="md:px-6 md:mr-14 lg:px-0 lg:mr-0 lg:w-full">
-          {contactInfo.map((info) => (
-            <InfoRow key={info.label} label={info.label} value={info.value} />
-          ))}
+    <aside className="w-full mb-20 h-full lg:w-[300] lg:sticky lg:top-0 lg:mb-0 lg:h-screen bg-neutral flex flex-col">
+      {/* Header fijo: info personal + CV */}
+      <div className="flex-shrink-0 px-8 pt-8 pb-6 flex flex-col gap-4">
+        <div className="flex flex-col lg:gap-4">
+          <PersonalInformation jobTitle={personalInfo.jobTitle} />
+          <div className="lg:w-full">
+            {contactInfo.map((info) => (
+              <InfoRow key={info.label} label={info.label} value={info.value} />
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-center mt-2">
+          <a href="/CV.pdf" download="CV_Duban_Zuluaga.pdf">
+            <Button>{downloadCV.label}</Button>
+          </a>
         </div>
       </div>
 
-      <div className="flex justify-center mt-4">
-        <a href="/CV.pdf" download="CV_Duban_Zuluaga.pdf">
-          <Button>{downloadCV.label}</Button>
-        </a>
-      </div>
-
-      <div className="flex flex-col sm:flex-row md:flex-row lg:flex-col gap-6">
-        <div className="w-full">
+      {/* Body scrolleable: skills, extras */}
+      <div className="flex-1 overflow-y-auto px-8 pb-4 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           <SkillMetric label={languages.label} skills={languages.skills} />
-        </div>
-
-        <div className="w-full">
           <SkillMetric label={techStack.label} skills={techStack.skills} />
         </div>
-      </div>
 
-      <div className="">
         <ExtraSkill label={extraSkill.label} skills={extraSkill.skills} />
-      </div>
 
-      <div className="">
         <Separator />
       </div>
 
-      <div className="flex flex-row justify-between">
+      {/* Icons fijos al fondo */}
+      <div className="flex-shrink-0 px-8 pb-4 flex flex-row justify-between">
         <SquareTerminal className="text-gray-600 w-5" />
         <Network className="text-gray-600 w-5" />
       </div>
