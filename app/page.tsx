@@ -17,8 +17,8 @@ export default function Home() {
           profile={{
             fullName: "Duban Zuluaga",
             jobTitle: "Fullstack Developer",
-            avatarUrl: "/images/header-soydz.png",
-            description: "Backend developer working mainly with Java, Spring Boot, and GraphQL. I also build frontends with React and TypeScript. My projects include a microservices fleet monitoring system with real-time WebSocket alerts, a financial tracking platform with Next.js, and a Kubernetes-deployed sales API. Everything containerized, everything with CI/CD.",
+            avatarUrl: "/images/header-soydz.webp",
+            description: "Backend and DevOps developer. My main stack is Java with Spring Boot, plus Docker/Podman and Kubernetes for infrastructure. I can also build frontends with React and TypeScript, and I set up automated CI/CD workflows to keep deployments running smoothly.",
             labelBtn: "More",
             modalData: {
               human: {
@@ -214,7 +214,7 @@ export default function Home() {
             {
               title: "Supermarket Sales Management",
               description: "API for sales control across supermarket chains, featuring automated deployment on a Kubernetes cluster.",
-              imageUrl: "/images/pt-supermercado.png",
+              imageUrl: "/images/pt-supermercado.webp",
               textBtn: "Learn_More",
               details: {
                 stack: ["Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Docker"],
@@ -232,7 +232,7 @@ export default function Home() {
             {
               title: "Fleet Guard 360",
               description: "Real-time fleet monitoring system with satellite tracking, built on a microservices architecture.",
-              imageUrl: "/images/fleet-guard-360.png",
+              imageUrl: "/images/fleet-guard-360.webp",
               textBtn: "Learn_More",
               details: {
                 stack: ["Java 21", "Spring Boot", "GraphQL", "React", "Docker", "RabbitMQ"],
@@ -250,7 +250,7 @@ export default function Home() {
             {
               title: "Tracely",
               description: "High-precision wealth tracking platform with budget management, analytics, and type-safe financial data.",
-              imageUrl: "/images/tracely.png",
+              imageUrl: "/images/tracely.webp",
               textBtn: "Learn_More",
               details: {
                 stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "TanStack Query", "Zod"],
@@ -269,7 +269,7 @@ export default function Home() {
             {
               title: "Global Renewable Energy Monitoring",
               description: "Full-stack platform to analyze global solar, wind, and hydroelectric energy production and consumption.",
-              imageUrl: "/images/renewableEnergies.png",
+              imageUrl: "/images/renewableEnergies.webp",
               textBtn: "Learn_More",
               details: {
                 stack: ["TypeScript", "React", "Java", "Spring Boot", "Tailwind CSS"],
@@ -288,7 +288,7 @@ export default function Home() {
             {
               title: "Unix Command Interpreter",
               description: "A from-scratch Unix shell implementation capable of executing both internal and external commands.",
-              imageUrl: "/images/terminal-unix.png",
+              imageUrl: "/images/terminal-unix.webp",
               textBtn: "Learn_More",
               details: {
                 stack: ["C", "Linux API", "Unix"],

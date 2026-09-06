@@ -3,7 +3,7 @@
 import { Button, Input, TextArea, TextAreaProps, Toast } from "../atoms";
 import { useState } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
-import { ChevronRight, Mail } from "lucide-react";
+import { ChevronRight, LoaderCircle, Mail } from "lucide-react";
 import { FormEvent } from "react";
 
 interface InputProps {
@@ -21,31 +21,44 @@ export interface ContactProps {
 }
 
 export function Contact({ input, textInput, textArea, textTextArea, textBtn }: Readonly<ContactProps>) {
-    // estado del formulario
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+    const [invalidFields, setInvalidFields] = useState<string[]>([]);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+
+        const emailValue = formData.get(input.name)?.toString().trim() ?? "";
+        const messageValue = formData.get(textArea.name)?.toString().trim() ?? "";
+
+        const invalid: string[] = [];
+        if (!emailValue) invalid.push(input.name);
+        if (!messageValue) invalid.push(textArea.name);
+
+        setInvalidFields([]);
+        if (invalid.length > 0) {
+            requestAnimationFrame(() => setInvalidFields(invalid));
+            return;
+        }
+
         setStatus('sending');
 
-        // lee los datos del formulario
-        const formData = new FormData(event.currentTarget);
-        // llama la Server Action, que usa Resend para enviar el email
         const result = await sendEmail(formData);
 
-        // verifica el resultado del Server Action. Si es exitosa o genera error
         if (result.success) {
             setStatus('success');
-            // limpiar formulario
-            (event.target as HTMLFormElement).reset();
+            form.reset();
         } else {
             setStatus('error');
         }
 
-        // despues de 5 segundos
         setTimeout(() => setStatus('idle'), 5000);
     }
 
+    function clearInvalid(name: string) {
+        setInvalidFields((prev) => prev.filter((f) => f !== name));
+    }
 
     return (
         <section>
@@ -53,7 +66,7 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
                 <Mail className="text-primary" />
                 <h3 className="uppercase text-txt-title font-mono font-semibold py-4">transmission_protocol</h3>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-10 border border-tertiary p-8">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-10 border border-tertiary p-8">
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-1 text-txt-main font-mono">
@@ -66,6 +79,9 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
                             type={input.type}
                             placeholder={input.placeholder}
                             required
+                            aria-invalid={invalidFields.includes(input.name)}
+                            className={invalidFields.includes(input.name) ? "border-red-500 animate-[shake_0.3s_ease-in-out]" : ""}
+                            onInput={() => clearInvalid(input.name)}
                         />
                     </div>
                     <div className="flex flex-col gap-2">
@@ -79,20 +95,28 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
                             placeholder={textArea.placeholder}
                             required
                             rows={4}
+                            aria-invalid={invalidFields.includes(textArea.name)}
+                            className={invalidFields.includes(textArea.name) ? "border-red-500 animate-[shake_0.3s_ease-in-out]" : ""}
+                            onInput={() => clearInvalid(textArea.name)}
                         />
                     </div>
                 </div>
                 <div>
-                    {/* Una vez enviado el email, el boton se desactiva mientras procesa el envio del email */}
                     <Button
                         type="submit"
                         disabled={status === "sending"}
                         className="bg-primary"
-                    >{status === "sending" ? "Transmitting..." : textBtn}</Button>
+                    >
+                        {status === "sending" ? (
+                            <span className="flex items-center gap-2">
+                                <LoaderCircle className="animate-spin" size={16} />
+                                Transmitting...
+                            </span>
+                        ) : textBtn}
+                    </Button>
                 </div>
             </form>
 
-            {/* Notificación del resultado de enviar el email */}
             {status === "success" && (
                 <Toast type="success" message="Transmission_Successful: Data sent to root"/>
             )}
