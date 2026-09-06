@@ -34,16 +34,22 @@ export function Profile({
     <article className="flex flex-col items-center border border-tertiary px-4 pt-10 sm:px-6 xl:flex-row xl:px-10 xl:items-start">
       <div className="flex flex-col gap-6 text-center max-w-full xl:max-w-2/3 lg:text-left">
         <p className="text-primary opacity-80 text-sm tracking-widest font-mono">{`/// INIT_SEQUENCE: PROFILE`}</p>
-        <div className="flex flex-col gap-4 h-full justify-between py-6">
-          <div className="flex flex-col gap-3">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl">I&apos;m {fullName}</h2>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black uppercase tracking-tighter text-gradient">{jobTitle}</h2>
+        <div className="flex flex-col gap-12 h-full justify-between py-6">
+          <div className="flex flex-col gap-5 sm:gap-3 lg:gap-6">
+            <h2 className="text-4xl text-center sm:text-5xl md:text-6xl xl:text-left xl:text-5xl 2xl:text-7xl">
+              I&apos;m {fullName}
+            </h2>
+            <h2 className="text-3xl text-center sm:text-4xl md:text-5xl xl:text-left xl:text-4xl 2xl:text-6xl font-black uppercase tracking-tighter text-gradient ">
+              {jobTitle}
+            </h2>
           </div>
           <div>
             <p className="px-4 leading-loose text-txt-main">{description}</p>
           </div>
           <div className="mb-4">
-            <Button variant="outline" onClick={onBtnClick}>{labelBtn}</Button>
+            <Button variant="outline" onClick={onBtnClick}>
+              {labelBtn}
+            </Button>
           </div>
         </div>
       </div>

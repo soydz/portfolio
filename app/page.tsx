@@ -18,7 +18,7 @@ export default function Home() {
             fullName: "Duban Zuluaga",
             jobTitle: "Fullstack Developer",
             avatarUrl: "/images/header-soydz.webp",
-            description: "Backend developer working mainly with Java, Spring Boot, and GraphQL. I also build frontends with React and TypeScript. My projects include a microservices fleet monitoring system with real-time WebSocket alerts, a financial tracking platform with Next.js, and a Kubernetes-deployed sales API. Everything containerized, everything with CI/CD.",
+            description: "Backend and DevOps developer. My main stack is Java with Spring Boot, plus Docker/Podman and Kubernetes for infrastructure. I can also build frontends with React and TypeScript, and I set up automated CI/CD workflows to keep deployments running smoothly.",
             labelBtn: "More",
             modalData: {
               human: {
