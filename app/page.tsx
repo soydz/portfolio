@@ -1,3 +1,5 @@
+'use client'
+
 import { BackToTop, Contact } from "@/components/molecules";
 import {
   Education,
@@ -7,32 +9,35 @@ import {
   Footer,
 } from "@/components/organisms";
 import { Binary, Boxes, Cloud, Command, Container, Cpu, Database, FileBracesCorner, LayoutDashboard, Microchip, Monitor, Orbit, Server, Terminal, Workflow, Zap } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col gap-20 flex-1 min-w-0 bg-background px-10 relative">
       <header id="user_root">
         <Header
-          titleModal="User_Details"
+          titleModal={t("header.titleModal")}
           profile={{
             fullName: "Duban Zuluaga",
-            jobTitle: "Fullstack Developer",
+            jobTitle: t("header.jobTitle"),
             avatarUrl: "/images/header-soydz.webp",
-            description: "Backend and DevOps developer. My main stack is Java with Spring Boot, plus Docker/Podman and Kubernetes for infrastructure. I can also build frontends with React and TypeScript, and I set up automated CI/CD workflows to keep deployments running smoothly.",
-            labelBtn: "More",
+            description: t("header.description"),
+            labelBtn: t("header.labelBtn"),
             modalData: {
               human: {
-                hobbies: "When I'm not staring at a screen, I'm usually losing myself in a movie or a series—I'm a true cinephile. I also have a deep interest in freestyle battles and the art of improvisation.",
-                motivation: "My drive started as a kid, taking toys apart not to break them, but to figure out how they worked. That same obsession with the 'inner workings' is what leads me to dive deep into the guts of a system today.",
-                curiosities: "I love tinkering with hardware. Whether it's experimenting with an Arduino Uno or setting up a home server on an old PC using K3s and Podman, I find that building the infrastructure myself is the best way to truly master the software.",
-                philosophy: "I'm a pragmatist. I believe the most elegant solution is usually the simplest one. I'll always choose a maintainable, straightforward architecture over a complex one just to be 'clever'.",
-                soundtrack: "My focus is powered by 80s New Wave and the energy of Salsa. To unwind, I turn to classical music, particularly the piano and violin—which is why I'm currently teaching myself how to play the piano.",
+                hobbies: t("header.modal.hobbies"),
+                motivation: t("header.modal.motivation"),
+                curiosities: t("header.modal.curiosities"),
+                philosophy: t("header.modal.philosophy"),
+                soundtrack: t("header.modal.soundtrack"),
               },
               strengths: [
                 { label: "Backend_Core", value: "Java / Spring Boot" },
                 { label: "Frontend_Sense", value: "TypeScript / ReactJS" },
                 { label: "Infra_Logic", value: "Docker/Podman / Kubernetes" },
-                { label: "System_Mindset", value: "OS / Hardware / Optimization" }, 
+                { label: "System_Mindset", value: "OS / Hardware / Optimization" },
               ]
             }
           }
@@ -43,26 +48,26 @@ export default function Home() {
 
       <article id="knowledge_base">
         <Knowledge
-          title="Knowledge_Base"
+          title={t("knowledge.title")}
           cards={[
             {
               icon: Server,
-              title: "Backend Development",
+              title: t("knowledge.backend"),
               cardRows: [
                 {
-                  title: "Stack",
+                  title: t("knowledge.backend.stack"),
                   icon: Cpu,
                   description: "Java, Spring Boot",
                 },
                 {
-                  title: "Interfaces",
+                  title: t("knowledge.backend.interfaces"),
                   icon: Zap,
-                  description: "RESTful APIs & GraphQL Design",
+                  description: t("knowledge.backend.interfacesDesc"),
                 },
                 {
-                  title: "Persistence",
+                  title: t("knowledge.backend.persistence"),
                   icon: Database,
-                  description: "DB Management & Service Architecture",
+                  description: t("knowledge.backend.persistenceDesc"),
                 },
               ],
               footer: {
@@ -81,23 +86,22 @@ export default function Home() {
             },
             {
               icon: Monitor,
-              title: "Frontend Engineering",
+              title: t("knowledge.frontend"),
               cardRows: [
                 {
-                  title: "Stack",
+                  title: t("knowledge.frontend.stack"),
                   icon: FileBracesCorner,
                   description: "TypeScript, JavaScript",
                 },
                 {
-                  title: "Frameworks",
+                  title: t("knowledge.frontend.frameworks"),
                   icon: LayoutDashboard,
-                  description: "React, Svelte",
+                  description: t("knowledge.frontend.frameworksDesc"),
                 },
                 {
-                  title: "Integration & UX",
+                  title: t("knowledge.frontend.integration"),
                   icon: Orbit,
-                  description:
-                    "RESTful API consumption and reactive state management",
+                  description: t("knowledge.frontend.integrationDesc"),
                 },
               ],
               footer: {
@@ -112,22 +116,22 @@ export default function Home() {
             },
             {
               icon: Cloud,
-              title: "DevOps & Cloud Infrastructure",
+              title: t("knowledge.devops"),
               cardRows: [
                 {
-                  title: "Orchestration",
+                  title: t("knowledge.devops.orchestration"),
                   icon: Boxes,
                   description: "Kubernetes (K8s)",
                 },
                 {
-                  title: "Containers",
+                  title: t("knowledge.devops.containers"),
                   icon: Container,
                   description: "Docker/Podman",
                 },
                 {
-                  title: "Automation",
+                  title: t("knowledge.devops.automation"),
                   icon: Workflow,
-                  description: "CI/CD pipeline development",
+                  description: t("knowledge.devops.automationDesc"),
                 },
               ],
               footer: {
@@ -145,22 +149,22 @@ export default function Home() {
             },
             {
               icon: Terminal,
-              title: "Computer Science Fundamentals",
+              title: t("knowledge.cs"),
               cardRows: [
                 {
-                  title: "OS Internals",
+                  title: t("knowledge.cs.osInternals"),
                   icon: Microchip,
-                  description: "Memory, process management, and concurrency",
+                  description: t("knowledge.cs.osInternalsDesc"),
                 },
                 {
-                  title: "Low-Level",
+                  title: t("knowledge.cs.lowLevel"),
                   icon: Binary,
-                  description: "System programming in C",
+                  description: t("knowledge.cs.lowLevelDesc"),
                 },
                 {
-                  title: "System Utilities",
+                  title: t("knowledge.cs.systemUtils"),
                   icon: Command,
-                  description: "Unix environment and Shell Scripting",
+                  description: t("knowledge.cs.systemUtilsDesc"),
                 },
               ],
               footer: {
@@ -182,26 +186,25 @@ export default function Home() {
 
       <article id="academic_log">
         <Education
-          title="ACADEMIC_LOG"
+          title={t("education.title")}
           cards={[
             {
               institution: "Universidad de Antioquia",
-              dates: "2023 - Present",
+              dates: `2023 - ${t("education.present")}`,
               degree: "Ingeniero de Sistemas",
-              description:
-                "Systems Engineering at Universidad de Antioquia. Coursework covers software engineering, DevOps, and distributed systems.",
+              description: t("education.udea"),
             },
             {
               degree: "Red Hat System Administration I (RH124)",
               institution: "Red Hat",
               dates: "Nov 2025",
-              description: "Focused on core Linux administration tasks, including CLI proficiency, file system hierarchy management, user administration, and security permissions within the RHEL 9.3 environment."
+              description: t("education.rh124"),
             },
             {
               degree: "Red Hat OpenShift Development I (DO188)",
               institution: "Red Hat",
               dates: "Nov 2025",
-              description: "Comprehensive training on containerizing applications using Podman 4.18. Focused on building, managing, and running containers in rootless environments, along with a foundational introduction to OpenShift orchestration and Kubernetes-based deployments."
+              description: t("education.do188"),
             },
           ]}
         />
@@ -209,98 +212,98 @@ export default function Home() {
 
       <article id="portfolio_log">
         <Portfolio
-          title="PORTFOLIO_LOG"
+          title={t("portfolio.title")}
           cards={[
             {
-              title: "Supermarket Sales Management",
-              description: "API for sales control across supermarket chains, featuring automated deployment on a Kubernetes cluster.",
+              title: t("portfolio.supermarket.title"),
+              description: t("portfolio.supermarket.desc"),
               imageUrl: "/images/pt-supermercado.webp",
-              textBtn: "Learn_More",
+              textBtn: t("portfolio.learnMore"),
               details: {
                 stack: ["Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Docker"],
                 features: [
-                  "Automated deployment pipeline for scalability",
-                  "RESTful API for multi-branch sales tracking",
-                  "Containerized database management using stateful sets"
+                  t("portfolio.supermarket.f1"),
+                  t("portfolio.supermarket.f2"),
+                  t("portfolio.supermarket.f3"),
                 ],
-                challenge: "Data persistence across pod restarts using Kubernetes StatefulSets and persistent volumes.",
+                challenge: t("portfolio.supermarket.challenge"),
                 links: [
-                  { label: "Github_Repository", url: "https://github.com/soydz/pt-supermercado" }
+                  { label: t("portfolio.githubRepo"), url: "https://github.com/soydz/pt-supermercado" }
                 ]
               }
             },
             {
-              title: "Fleet Guard 360",
-              description: "Real-time fleet monitoring system with satellite tracking, built on a microservices architecture.",
+              title: t("portfolio.fleet.title"),
+              description: t("portfolio.fleet.desc"),
               imageUrl: "/images/fleet-guard-360.webp",
-              textBtn: "Learn_More",
+              textBtn: t("portfolio.learnMore"),
               details: {
                 stack: ["Java 21", "Spring Boot", "GraphQL", "React", "Docker", "RabbitMQ"],
                 features: [
-                  "Microservices architecture with API Gateway and JWT auth",
-                  "Real-time push notifications via WebSocket (STOMP/SockJS)",
-                  "Nginx reverse proxy with isolated Docker networks"
+                  t("portfolio.fleet.f1"),
+                  t("portfolio.fleet.f2"),
+                  t("portfolio.fleet.f3"),
                 ],
-                challenge: "Two isolated Docker networks, JWT auth across 5 microservices, and real-time alerts via WebSocket/RabbitMQ.",
+                challenge: t("portfolio.fleet.challenge"),
                 links: [
-                  { label: "Github_Repository", url: "https://github.com/soydz/fleet-guard-360" }
+                  { label: t("portfolio.githubRepo"), url: "https://github.com/soydz/fleet-guard-360" }
                 ]
               }
             },
             {
-              title: "Tracely",
-              description: "High-precision wealth tracking platform with budget management, analytics, and type-safe financial data.",
+              title: t("portfolio.tracely.title"),
+              description: t("portfolio.tracely.desc"),
               imageUrl: "/images/tracely.webp",
-              textBtn: "Learn_More",
+              textBtn: t("portfolio.learnMore"),
               details: {
                 stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "TanStack Query", "Zod"],
                 features: [
-                  "Dynamic balance overview with real-time surplus/deficit indicators",
-                  "Category-based budget management with visual progress bars",
-                  "Interactive donut charts for income and expense analytics"
+                  t("portfolio.tracely.f1"),
+                  t("portfolio.tracely.f2"),
+                  t("portfolio.tracely.f3"),
                 ],
-                challenge: "Implementing a feature-based architecture with high cohesion per domain module while ensuring type safety across the entire transaction lifecycle using Zod schemas and TanStack Query for server state management.",
+                challenge: t("portfolio.tracely.challenge"),
                 links: [
-                  { label: "Github_Repository", url: "https://github.com/soydz/tracely" },
-                  { label: "Live_Demo", url: "https://tracely.soydz.com/" }
+                  { label: t("portfolio.githubRepo"), url: "https://github.com/soydz/tracely" },
+                  { label: t("portfolio.liveDemo"), url: "https://tracely.soydz.com/" }
                 ]
               }
             },
             {
-              title: "Global Renewable Energy Monitoring",
-              description: "Full-stack platform to analyze global solar, wind, and hydroelectric energy production and consumption.",
+              title: t("portfolio.renewable.title"),
+              description: t("portfolio.renewable.desc"),
               imageUrl: "/images/renewableEnergies.webp",
-              textBtn: "Learn_More",
+              textBtn: t("portfolio.learnMore"),
               details: {
                 stack: ["TypeScript", "React", "Java", "Spring Boot", "Tailwind CSS"],
                 features: [
-                  "Real-time data visualization of global energy trends",
-                  "Dynamic filtering by energy source and region",
-                  "High-performance API for handling large datasets"
+                  t("portfolio.renewable.f1"),
+                  t("portfolio.renewable.f2"),
+                  t("portfolio.renewable.f3"),
                 ],
-                challenge: "Integrating complex data visualizations while maintaining a responsive UI and ensuring the backend could serve large volumes of data without latency.",
+                challenge: t("portfolio.renewable.challenge"),
                 links: [
-                  { label: "Frontend_Repo", url: "https://github.com/soydz/renewableEnergiesFrontend" },
-                  { label: "Backend_Repo", url: "https://github.com/soydz/renewableEnergiesBackend" }
+                  { label: t("portfolio.frontendRepo"), url: "https://github.com/soydz/renewableEnergiesFrontend" },
+                  { label: t("portfolio.backendRepo"), url: "https://github.com/soydz/renewableEnergiesBackend" }
                 ]
               }
             },
             {
-              title: "Unix Command Interpreter",
-              description: "A from-scratch Unix shell implementation capable of executing both internal and external commands.",
+              title: t("portfolio.unix.title"),
+              description: t("portfolio.unix.desc"),
               imageUrl: "/images/terminal-unix.webp",
-              textBtn: "Learn_More",
+              textBtn: t("portfolio.learnMore"),
               details: {
                 stack: ["C", "Linux API", "Unix"],
                 features: [
-                  "Support for internal shell commands",
-                  "Execution of external binaries via fork/exec",
-                  "I/O redirection and pipe implementation"
+                  t("portfolio.unix.f1"),
+                  t("portfolio.unix.f2"),
+                  t("portfolio.unix.f3"),
                 ],
-                challenge: "Designing a robust command parser and managing the complex lifecycle of child processes to prevent zombie processes and handle signals correctly.",
+                challenge: t("portfolio.unix.challenge"),
                 links: [
-                  { label: "Shell_Repo", url: "https://github.com/soydz/so-lab2-unix-shell" },
-                  { label: "Utilities_Unix_Repo", url: "https://github.com/soydz/so-lab1-unix-utilities" }
+                  { label: t("portfolio.shellRepo"), url: "https://github.com/soydz/so-lab2-unix-shell" },
+                  { label: t("portfolio.utilitiesRepo"), url: "https://github.com/soydz/so-lab1-unix-utilities" }
                 ]
               }
             }
@@ -313,15 +316,15 @@ export default function Home() {
           input={{
             name: "email",
             type: "email",
-            placeholder: "user@domain.com",
+            placeholder: t("contact.emailPlaceholder"),
           }}
-          textInput="Set_target_email"
+          textInput={t("contact.emailLabel")}
           textArea={{
             name: "message",
-            placeholder: "Enter transmission data..."
+            placeholder: t("contact.messagePlaceholder"),
           }}
-          textTextArea="Compile_payload"
-          textBtn="Transmit_data"
+          textTextArea={t("contact.messageLabel")}
+          textBtn={t("contact.submit")}
         />
       </article>
 
@@ -329,8 +332,8 @@ export default function Home() {
 
       <footer className="my-4">
         <Footer
-          label="SYSTEM_STATUS:"
-          status="STABLE"
+          label={t("footer.status")}
+          status={t("footer.stable")}
           separator="//"
           owner="SOY_DZ"
         />

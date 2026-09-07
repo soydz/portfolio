@@ -5,6 +5,7 @@ import { useState } from "react";
 import { sendEmail } from "@/app/actions/sendEmail";
 import { ChevronRight, LoaderCircle, Mail } from "lucide-react";
 import { FormEvent } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 interface InputProps {
     type: string;
@@ -23,6 +24,7 @@ export interface ContactProps {
 export function Contact({ input, textInput, textArea, textTextArea, textBtn }: Readonly<ContactProps>) {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [invalidFields, setInvalidFields] = useState<string[]>([]);
+    const { t } = useLanguage();
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -64,7 +66,7 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
         <section>
             <div className="flex flex-row items-center gap-2">
                 <Mail className="text-primary" />
-                <h3 className="uppercase text-txt-title font-mono font-semibold py-4">transmission_protocol</h3>
+                <h3 className="uppercase text-txt-title font-mono font-semibold py-4">{t("contact.title")}</h3>
             </div>
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-10 border border-tertiary p-8">
                 <div className="flex flex-col gap-5">
@@ -110,7 +112,7 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
                         {status === "sending" ? (
                             <span className="flex items-center gap-2">
                                 <LoaderCircle className="animate-spin" size={16} />
-                                Transmitting...
+                                {t("contact.sending")}
                             </span>
                         ) : textBtn}
                     </Button>
@@ -118,10 +120,10 @@ export function Contact({ input, textInput, textArea, textTextArea, textBtn }: R
             </form>
 
             {status === "success" && (
-                <Toast type="success" message="Transmission_Successful: Data sent to root"/>
+                <Toast type="success" message={t("contact.success")}/>
             )}
             {status === "error" && (
-                <Toast type="error" message="Transmission_Failed: Server_Error_0x404"/>
+                <Toast type="error" message={t("contact.error")}/>
             )}
         </section>
     )
