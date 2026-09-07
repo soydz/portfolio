@@ -1,4 +1,7 @@
+'use client'
+
 import { TerminalLink } from "./TerminalLink";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // props de los enlaces (github) de los proyectos
 interface LinksProps {
@@ -14,10 +17,12 @@ export interface ProjectDetailsProps {
 }
 
 export function ProjectDetails({ stack, features, challenge, links }: Readonly<ProjectDetailsProps>) {
+    const { t } = useLanguage();
+
     return (
         <div className="flex flex-col gap-10 font-mono text-sm">
             <section className="flex flex-col gap-3">
-                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// Build_STack`}</span>
+                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// ${t("project.stack")}`}</span>
                 <div className="flex flex-wrap gap-2">
                     {stack?.map((tech) => (
                         <span key={tech} className="px-2 py-1 bg-tertiary/50 border border-tertiary text-txt-main uppercase text-xs">{tech}</span>
@@ -26,7 +31,7 @@ export function ProjectDetails({ stack, features, challenge, links }: Readonly<P
             </section>
 
             <section className="flex flex-col gap-3">
-                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// Core_features`}</span>
+                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// ${t("project.features")}`}</span>
                 <div className="flex flex-col gap-2">
                     {features?.map((feature) => (
                         <div key={feature} className="flex gap-2">
@@ -39,13 +44,13 @@ export function ProjectDetails({ stack, features, challenge, links }: Readonly<P
 
             <section className="flex flex-col gap-3">
                 <div>
-                    <span className="text-primary/75 text-xs uppercase tracking-widest">{`// Tech_challenge`}</span>
+                    <span className="text-primary/75 text-xs uppercase tracking-widest">{`// ${t("project.challenge")}`}</span>
                 </div>
                 <p className="text-txt-main leading-relaxed pl-4 border-l border-tertiary">{challenge}</p>
             </section>
 
             <section className="flex flex-col gap-3">
-                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// Access_logs`}</span>
+                <span className="text-primary/75 text-xs uppercase tracking-widest">{`// ${t("project.logs")}`}</span>
                 <div className="flex flex-col gap-2">
                     {links?.map((link) => (
                         <TerminalLink key={link.label} label={link.label.toLocaleLowerCase()} url={link.url} prefix="cat /dev/logs/" />
