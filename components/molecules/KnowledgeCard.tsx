@@ -31,10 +31,10 @@ function KnowledgeCardRow({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-2">
-        <Icon className="text-primary/85 size-4" />
-        <span className="text-txt-title font-mono text-sm">{title}</span>
+        <Icon className="size-4 shrink-0 text-primary/85" aria-hidden="true" strokeWidth={1.75} />
+        <span className="font-mono text-sm text-txt-title">{title}</span>
       </div>
-      <p className="text-txt-main/70 text-sm pl-6 font-mono leading-relaxed">
+      <p className="pl-6 font-mono text-[13px] leading-relaxed text-txt-main/85">
         {description}
       </p>
     </div>
@@ -49,24 +49,23 @@ export function KnowledgeCard({
 }: Readonly<KnowledgeCardProps>) {
   const Icon = icon;
   return (
-    <article className="flex flex-col justify-between h-full min-w-0 group relative bg-neutral border border-tertiary p-6 rounded-sm hover:border-primary transition-all duration-300 font-mono">
+    <article className="group relative flex h-full min-w-0 flex-col justify-between border border-tertiary bg-neutral p-5 font-mono transition-colors duration-300 hover:border-primary/70 sm:p-6">
       <div className="min-w-0">
         {/* Decoración superior estilo terminal */}
-        <div className="absolute top-2 right-3 flex gap-1">
-          <div className="w-2 h-2 rounded-full bg-tertiary group-hover:bg-primary" />
-          <div className="w-2 h-2 rounded-full bg-tertiary" />
+        <div aria-hidden="true" className="absolute right-3 top-3 flex gap-1.5">
+          <span className="size-1.5 bg-tertiary transition-colors group-hover:bg-primary" />
+          <span className="size-1.5 bg-tertiary" />
+          <span className="size-1.5 bg-tertiary" />
         </div>
 
-        <div className="flex flex-row items-center gap-3 mb-3">
-          <div className="text-primary">
-            <Icon />
-          </div>
-          <h3 className="font-mono font-bold uppercase text-txt-title tracking-tighter">
+        <div className="mb-4 flex items-center gap-3 pr-10">
+          <Icon className="size-5 shrink-0 text-primary" aria-hidden="true" strokeWidth={1.75} />
+          <h3 className="font-mono text-sm font-bold uppercase tracking-tight text-txt-title">
             {title}
           </h3>
         </div>
 
-        <div className="flex flex-col gap-4 py-2">
+        <div className="flex flex-col gap-4 py-1">
           {cardRows.map((row) => (
             <KnowledgeCardRow
               key={row.title}
@@ -77,11 +76,10 @@ export function KnowledgeCard({
           ))}
         </div>
       </div>
-      <div className="mt-4">
+
+      <div className="mt-5">
         <Separator />
-      </div>
-      <div className="flex flex-col gap-3 mt-4">
-        <div className="flex flex-col gap-2 text-sm ">
+        <div className="mt-3 flex flex-col gap-2">
           {footer.proyects.map((item, index) => (
             <TerminalLink
               key={item.label}

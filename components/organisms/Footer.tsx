@@ -14,22 +14,22 @@ export function Footer({
   owner,
 }: Readonly<FooterProps>) {
   return (
-    <footer className="flex flex-col gap-2 items-center justify-center md:flex-row md:gap-6 lg:mb-12">
-      <div className="flex gap-2">
+    <div className="flex flex-col items-center justify-center gap-2 border-t border-tertiary pt-6 font-mono text-xs uppercase tracking-[0.16em] text-txt-main/75 sm:flex-row sm:gap-4">
+      <div className="flex items-center gap-2">
         <span>{label}</span>
-        <span className="text-primary/75 animate-pulse">{status}</span>
+        <span className="text-primary">{status}</span>
       </div>
 
-      <div className="flex gap-2">
-        <span>{separator}</span>
-        <span>{new Date().getFullYear()}</span>
-        <span>{separator}</span>
-      </div>
+      <span aria-hidden="true" className="hidden text-tertiary sm:inline">{separator}</span>
 
-      <div className="flex gap-2">
-        <Heart className="text-primary/75" />
+      <span>{new Date().getFullYear()}</span>
+
+      <span aria-hidden="true" className="hidden text-tertiary sm:inline">{separator}</span>
+
+      <div className="flex items-center gap-2">
+        <Heart className="size-3.5 text-primary/75" aria-hidden="true" />
         <span>{owner}</span>
       </div>
-    </footer>
+    </div>
   );
 }
