@@ -1,15 +1,19 @@
 'use client'
 
 import { ChevronLeft, ChevronRight, FolderOpen } from "lucide-react";
-import { Modal, PortfolioCard, PortfolioCardProps, ProjectDetails } from "../molecules";
+import { Modal, PortfolioCard, PortfolioCardProps, ProjectDetails, SectionHeading } from "../molecules";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 interface PortfolioProps {
   title: string;
   cards: PortfolioCardProps[];
 }
 
+const AUTOPLAY_MS = 7000;
+
 export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
+  const { t } = useLanguage();
   const [selectCard, setSelectCard] = useState<PortfolioCardProps | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -20,7 +24,7 @@ export function Portfolio({ title, cards }: Readonly<PortfolioProps>) {
   const activeIndexRef = useRef(0);
   const totalCards = cards.length;
 
-const scrollToCard = useCallback((index: number) => {
+  const scrollToCard = useCallback((index: number) => {
     const container = scrollRef.current;
     if (!container) return;
 
@@ -49,9 +53,9 @@ const scrollToCard = useCallback((index: number) => {
   const startAutoScroll = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      if (isPausedRef.current || isModalOpenRef.current) return;
+      if (document.hidden || isPausedRef.current || isModalOpenRef.current) return;
       scrollNext();
-    }, 4000);
+    }, AUTOPLAY_MS);
   }, [scrollNext]);
 
   const handleManualNav = useCallback((action: () => void) => {
@@ -60,6 +64,9 @@ const scrollToCard = useCallback((index: number) => {
   }, [startAutoScroll]);
 
   useEffect(() => {
+    // Respeta a quien pidió menos movimiento: sin autoplay, navegación manual.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     startAutoScroll();
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -96,27 +103,17 @@ const scrollToCard = useCallback((index: number) => {
 
   return (
     <section>
-      <div className="flex flex-row items-center gap-2">
-        <FolderOpen className="text-primary" />
-        <h2 className="text-txt-title font-mono font-semibold py-4">{title}</h2>
-      </div>
+      <SectionHeading icon={FolderOpen} title={title} />
 
-      <div className="relative group/carousel">
-        <button
-          onClick={() => handleManualNav(scrollPrev)}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-neutral/80 border border-tertiary p-2 text-primary opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-tertiary hover:text-white cursor-pointer"
-          aria-label="Previous project"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={() => handleManualNav(scrollNext)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-neutral/80 border border-tertiary p-2 text-primary opacity-0 group-hover/carousel:opacity-100 transition-opacity hover:bg-tertiary hover:text-white cursor-pointer"
-          aria-label="Next project"
-        >
-          <ChevronRight size={20} />
-        </button>
-
+      <div
+        className="group/carousel relative"
+        onFocusCapture={() => { isPausedRef.current = true }}
+        onBlurCapture={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+            isPausedRef.current = isModalOpenRef.current;
+          }
+        }}
+      >
         <div
           ref={scrollRef}
           onMouseEnter={() => { isPausedRef.current = true }}
@@ -125,13 +122,13 @@ const scrollToCard = useCallback((index: number) => {
               isPausedRef.current = false
             }
           }}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto"
         >
           {cards?.map((card) => (
             <div
               key={card.title}
               data-slide
-              className="min-w-full snap-center flex justify-center px-4 py-5"
+              className="flex min-w-full snap-center justify-center px-0 py-1 sm:px-6"
             >
               <PortfolioCard
                 {...card}
@@ -145,19 +142,43 @@ const scrollToCard = useCallback((index: number) => {
           ))}
         </div>
 
-        <div className="flex justify-center gap-2 mt-4">
-          {cards.map((card, index) => (
-            <button
-              key={card.title}
-              onClick={() => handleManualNav(() => scrollToCard(index))}
-              className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                activeIndex === index
-                  ? "bg-primary w-6"
-                  : "bg-tertiary hover:bg-primary/50"
-              }`}
-              aria-label={`Go to ${card.title}`}
-            />
-          ))}
+        {/* Controles bajo la card: nunca se superponen al contenido */}
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <button
+            onClick={() => handleManualNav(scrollPrev)}
+            aria-label={t("portfolio.previous")}
+            className="flex size-9 items-center justify-center border border-tertiary text-primary transition-colors hover:border-primary hover:bg-primary hover:text-neutral"
+          >
+            <ChevronLeft size={18} aria-hidden="true" />
+          </button>
+
+          <div className="flex items-center gap-1">
+            {cards.map((card, index) => (
+              <button
+                key={card.title}
+                onClick={() => handleManualNav(() => scrollToCard(index))}
+                className="group/dot flex h-6 items-center px-1"
+                aria-label={`${t("portfolio.goTo")} ${index + 1}: ${card.title}`}
+                aria-current={activeIndex === index}
+              >
+                <span
+                  className={`block h-1 transition-all duration-300 ${
+                    activeIndex === index
+                      ? "w-7 bg-primary"
+                      : "w-4 bg-tertiary group-hover/dot:bg-txt-main/40"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => handleManualNav(scrollNext)}
+            aria-label={t("portfolio.next")}
+            className="flex size-9 items-center justify-center border border-tertiary text-primary transition-colors hover:border-primary hover:bg-primary hover:text-neutral"
+          >
+            <ChevronRight size={18} aria-hidden="true" />
+          </button>
         </div>
       </div>
 
