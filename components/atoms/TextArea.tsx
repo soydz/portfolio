@@ -10,6 +10,6 @@ export function TextArea({ className = "", ...props }: Readonly<TextareaHTMLAttr
     return (
         <textarea
             {...props}
-            className={`border border-tertiary p-4 font-mono focus:outline-none focus:border-primary transition-colors ${className}`}></textarea>
+            className={`w-full resize-y border border-tertiary bg-background/40 p-4 font-mono text-sm text-foreground placeholder:text-txt-main/55 transition-colors focus:border-primary focus:outline-none focus-visible:outline-none aria-invalid:border-red-500 ${className}`}></textarea>
     )
 }
