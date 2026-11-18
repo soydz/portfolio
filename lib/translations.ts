@@ -4,10 +4,11 @@ export const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Header
     "header.titleModal": "User_Details",
+    "header.greeting": "I'm",
     "header.jobTitle": "Fullstack Developer",
     "header.description":
       "Backend and DevOps developer. My main stack is Java with Spring Boot, plus Docker/Podman and Kubernetes for infrastructure. I can also build frontends with React and TypeScript, and I set up automated CI/CD workflows to keep deployments running smoothly.",
-    "header.labelBtn": "More",
+    "header.labelBtn": "Open_Profile",
 
     // Header Modal
     "header.modal.hobbies":
@@ -28,7 +29,16 @@ export const translations: Record<Locale, Record<string, string>> = {
     "sidebar.mode": "Mode",
     "sidebar.modeValue": "Remote / Hybrid",
     "sidebar.downloadCV": "Download_CV.exe",
-    "sidebar.linguisticStack": "LINGUISTIC_STACK",
+    "sidebar.showSpecs": "System_Specs",
+    "sidebar.hideSpecs": "Hide_Specs",
+    "sidebar.switchLanguage": "Switch_to_Spanish",
+    "sidebar.languages": "Languages",
+    "sidebar.spanish": "Spanish",
+    "sidebar.english": "English",
+    "sidebar.levelNative": "Native",
+    "sidebar.levelTechnical": "A2 · Technical",
+    "sidebar.levelAdvanced": "Advanced",
+    "sidebar.levelIntermediate": "Intermediate",
     "sidebar.developmentStack": "Development_Stack",
     "sidebar.additionalDeps": "Additional_Dependencies",
 
@@ -91,6 +101,9 @@ export const translations: Record<Locale, Record<string, string>> = {
     "portfolio.liveDemo": "Live_Demo",
     "portfolio.shellRepo": "Shell_Repo",
     "portfolio.utilitiesRepo": "Utilities_Unix_Repo",
+    "portfolio.previous": "Previous project",
+    "portfolio.next": "Next project",
+    "portfolio.goTo": "Go to project",
 
     // Portfolio - Supermarket
     "portfolio.supermarket.title": "Supermarket Sales Management",
@@ -159,7 +172,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     "contact.submit": "Transmit_data",
     "contact.sending": "Transmitting...",
     "contact.success": "Transmission_Successful: Data sent to root",
-    "contact.error": "Transmission_Failed: Server_Error_0x404",
+    "contact.error": "Transmission_Failed: Server_error, please_try_again.",
 
     // Project Details
     "project.stack": "Build_Stack",
@@ -167,17 +180,22 @@ export const translations: Record<Locale, Record<string, string>> = {
     "project.challenge": "Tech_challenge",
     "project.logs": "Access_logs",
 
+    // Modal
+    "modal.close": "Close dialog",
+
     // Footer
     "footer.status": "SYSTEM_STATUS:",
     "footer.stable": "STABLE",
+    "footer.backToTop": "Back to top",
   },
   es: {
     // Header
     "header.titleModal": "Detalles_Usuario",
+    "header.greeting": "Soy",
     "header.jobTitle": "Desarrollador Fullstack",
     "header.description":
       "Desarrollador backend y DevOps. Mi stack principal es Java con Spring Boot, más Docker/Podman y Kubernetes para la infraestructura. También construyo frontends con React y TypeScript, y configuro flujos CI/CD automatizados para que los despliegues corran sin problemas.",
-    "header.labelBtn": "Ver más",
+    "header.labelBtn": "Abrir_Perfil",
 
     // Header Modal
     "header.modal.hobbies":
@@ -198,7 +216,16 @@ export const translations: Record<Locale, Record<string, string>> = {
     "sidebar.mode": "Modalidad",
     "sidebar.modeValue": "Remoto / Híbrido",
     "sidebar.downloadCV": "Descargar_CV.exe",
-    "sidebar.linguisticStack": "STACK_LINGÜÍSTICO",
+    "sidebar.showSpecs": "Especificaciones",
+    "sidebar.hideSpecs": "Ocultar",
+    "sidebar.switchLanguage": "Cambiar_a_Inglés",
+    "sidebar.languages": "Idiomas",
+    "sidebar.spanish": "Español",
+    "sidebar.english": "Inglés",
+    "sidebar.levelNative": "Nativo",
+    "sidebar.levelTechnical": "A2 · Técnico",
+    "sidebar.levelAdvanced": "Avanzado",
+    "sidebar.levelIntermediate": "Intermedio",
     "sidebar.developmentStack": "Stack_de_Desarrollo",
     "sidebar.additionalDeps": "Dependencias_Adicionales",
 
@@ -262,6 +289,9 @@ export const translations: Record<Locale, Record<string, string>> = {
     "portfolio.liveDemo": "Demo_En_Vivo",
     "portfolio.shellRepo": "Repo_Shell",
     "portfolio.utilitiesRepo": "Repo_Utilidades_Unix",
+    "portfolio.previous": "Proyecto anterior",
+    "portfolio.next": "Proyecto siguiente",
+    "portfolio.goTo": "Ir al proyecto",
 
     // Portfolio - Supermarket
     "portfolio.supermarket.title": "Gestión de Ventas para Supermercados",
@@ -333,7 +363,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     "contact.submit": "Transmitir_datos",
     "contact.sending": "Transmitiendo...",
     "contact.success": "Transmisión_Exitosa: Datos enviados a root",
-    "contact.error": "Transmisión_Fallida: Error_de_Servidor_0x404",
+    "contact.error": "Transmisión_Fallida: Error_del_servidor, intenta_de_nuevo.",
 
     // Project Details
     "project.stack": "Stack_del_Proyecto",
@@ -341,9 +371,13 @@ export const translations: Record<Locale, Record<string, string>> = {
     "project.challenge": "Reto_Técnico",
     "project.logs": "Logs_de_Acceso",
 
+    // Modal
+    "modal.close": "Cerrar diálogo",
+
     // Footer
     "footer.status": "ESTADO_DEL_SISTEMA:",
     "footer.stable": "ESTABLE",
+    "footer.backToTop": "Volver arriba",
   },
 };
 
