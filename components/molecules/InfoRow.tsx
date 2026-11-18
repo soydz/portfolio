@@ -5,9 +5,9 @@ export interface InfoRowProps {
 
 export function InfoRow({ label, value }: Readonly<InfoRowProps>) {
   return (
-    <div className="flex flex-row justify-between py-0.5">
-      <span>{label}</span>
-      <span>{value}</span>
+    <div className="flex items-baseline justify-between gap-3 font-mono text-xs">
+      <span className="uppercase tracking-wide text-txt-main/80">{label}</span>
+      <span className="text-right text-txt-main">{value}</span>
     </div>
   );
 }
