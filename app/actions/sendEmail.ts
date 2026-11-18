@@ -2,7 +2,6 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 const toEmail = process.env.TO_EMAIL;
 
 export async function sendEmail(formdata: FormData) {
@@ -18,7 +17,16 @@ export async function sendEmail(formdata: FormData) {
         }
     }
 
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey || !toEmail) {
+        return {
+            success: false,
+            error: "EMAIL_NOT_CONFIGURED"
+        }
+    }
+
     try {
+        const resend = new Resend(apiKey);
         // uso de resend para enviar el correo
         await resend.emails.send({
             from: 'Portfolio <contacto@soydz.com>',
