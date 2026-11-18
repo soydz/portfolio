@@ -30,23 +30,23 @@ export function ProfileDetails({ human, strengths }: Readonly<ProfileDetailsProp
     ];
 
     return (
-        <div className="flex flex-col gap-10 font-mono text-sm">
+        <div className="flex flex-col gap-10 text-sm">
             <section className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
-                    <span className="text-primary/75 text-sm tracking-widest uppercase">
+                    <span className="font-mono text-xs uppercase tracking-widest text-primary/90">
                         {`// Human_Mode`}
                     </span>
-                    <div className="h-0.5 flex-1 bg-tertiary/30"></div>
+                    <div aria-hidden="true" className="h-px flex-1 bg-tertiary/60"></div>
                 </div>
 
                 <div className="flex flex-col gap-5">
                     {/* renderiza todos los datos personales, información mas humana */}
                     {humanRecords.map((record, index) => (
                         <div key={record.key} className="flex flex-col gap-1">
-                            <span className="text-primary/60 uppercase tracking-tighter text-xs">
+                            <span className="font-mono text-[11px] uppercase tracking-wide text-primary/90">
                                 {`0x0${index + 1} : ${record.key}`}
                             </span>
-                            <p className="text-txt-main leading-relaxed pl-2">
+                            <p className="max-w-[72ch] pl-2 font-sans text-sm leading-relaxed text-txt-main/90">
                                 {record.value}
                             </p>
                         </div>
@@ -56,16 +56,17 @@ export function ProfileDetails({ human, strengths }: Readonly<ProfileDetailsProp
 
             <section className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
-                    <span className="text-primary/75 uppercase text-sm tracking-widest ">
+                    <span className="font-mono text-xs uppercase tracking-widest text-primary/90">
                         {`// Core_Strengths`}
                     </span>
+                    <div aria-hidden="true" className="h-px flex-1 bg-tertiary/60"></div>
                 </div>
                 {/* crea columnas para las fortalezas */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                <div className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
                     {strengths.map((item) => (
-                        <div key={item.label} className="flex justify-between items-center border-b border-tertiary pb-1">
-                            <span className="text-primary/60 text-xs uppercase">{item.label}</span>
-                            <span className="text-txt-main text-xs font-bold uppercase">{item.value}</span>
+                        <div key={item.label} className="flex items-center justify-between gap-4 border-b border-tertiary pb-1.5">
+                            <span className="font-mono text-[11px] uppercase tracking-wide text-primary/90">{item.label}</span>
+                            <span className="text-right font-mono text-[11px] font-bold uppercase text-txt-main/90">{item.value}</span>
                         </div>
                     ))}
                 </div>

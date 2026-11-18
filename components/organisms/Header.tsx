@@ -13,7 +13,7 @@ export function Header({ profile, titleModal }: Readonly<HeaderProps>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <header className="bg-neutral">
+    <div>
       {/* inyecta las propiedades de profile como props individuales */}
       {/* pasamos la función para apertura y cierre del modal */}
       <Profile
@@ -29,6 +29,6 @@ export function Header({ profile, titleModal }: Readonly<HeaderProps>) {
           />
         )}
       </Modal>
-    </header>
+    </div>
   );
 }
