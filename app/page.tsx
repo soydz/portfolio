@@ -15,12 +15,13 @@ export default function Home() {
   const { t } = useLanguage();
 
   return (
-    <div className="flex flex-col gap-20 flex-1 min-w-0 bg-background px-10 relative">
-      <header id="user_root">
+    <div className="relative flex min-w-0 flex-1 flex-col gap-16 bg-background px-4 pb-28 pt-6 sm:px-6 lg:gap-24 lg:px-10 lg:pt-8 xl:pb-12">
+      <header id="user_root" className="scroll-mt-6">
         <Header
           titleModal={t("header.titleModal")}
           profile={{
             fullName: "Duban Zuluaga",
+            greeting: t("header.greeting"),
             jobTitle: t("header.jobTitle"),
             avatarUrl: "/images/header-soydz.webp",
             description: t("header.description"),
@@ -46,7 +47,7 @@ export default function Home() {
       </header>
 
 
-      <article id="knowledge_base">
+      <article id="knowledge_base" className="scroll-mt-6">
         <Knowledge
           title={t("knowledge.title")}
           cards={[
@@ -171,7 +172,7 @@ export default function Home() {
                 proyects: [
                   {
                     label: "unix_shell",
-                    url: "github.com/soydz/so-lab2-unix-shell",
+                    url: "https://github.com/soydz/so-lab2-unix-shell",
                   },
                   {
                     label: "unix_utilities",
@@ -184,7 +185,7 @@ export default function Home() {
         />
       </article>
 
-      <article id="academic_log">
+      <article id="academic_log" className="scroll-mt-6">
         <Education
           title={t("education.title")}
           cards={[
@@ -210,7 +211,7 @@ export default function Home() {
         />
       </article>
 
-      <article id="portfolio_log">
+      <article id="portfolio_log" className="scroll-mt-6">
         <Portfolio
           title={t("portfolio.title")}
           cards={[
@@ -311,7 +312,7 @@ export default function Home() {
         />
       </article>
 
-      <article id="transmission_protocol">
+      <article id="transmission_protocol" className="scroll-mt-6">
         <Contact
           input={{
             name: "email",
@@ -330,7 +331,7 @@ export default function Home() {
 
       <BackToTop />
 
-      <footer className="my-4">
+      <footer className="mt-2">
         <Footer
           label={t("footer.status")}
           status={t("footer.stable")}

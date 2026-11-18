@@ -1,5 +1,5 @@
 import { Library } from "lucide-react";
-import { KnowledgeCard, KnowledgeCardProps } from "../molecules";
+import { KnowledgeCard, KnowledgeCardProps, SectionHeading } from "../molecules";
 
 interface KnowledgeProps {
   title: string;
@@ -9,12 +9,10 @@ interface KnowledgeProps {
 export function Knowledge({ title, cards }: Readonly<KnowledgeProps>) {
   return (
     <section className="min-w-0">
-      <div className="flex flex-row items-center gap-2">
-        <Library className="text-primary"/>
-        <h2 className="text-txt-title font-mono font-semibold uppercase py-4">{title}</h2>
-      </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6 ">
-        {/* renderiza cada card con su contenido */}
+      <SectionHeading icon={Library} title={title} />
+
+      {/* 2x2 en escritorio: evita la cuarta card huérfana al final de la fila */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {cards.map((card) => (
           <KnowledgeCard
             key={card.title}

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
 import { Locale, translations } from "./translations";
 
 interface LanguageContextType {
@@ -21,6 +21,11 @@ export function LanguageProvider({ children }: Readonly<{ children: ReactNode }>
   const toggleLanguage = useCallback(() => {
     setLocale((prev) => (prev === "en" ? "es" : "en"));
   }, []);
+
+  // Mantiene el idioma del documento alineado con el contenido.
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return (
     <LanguageContext.Provider value={{ locale, t, toggleLanguage }}>
